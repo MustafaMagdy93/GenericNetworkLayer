@@ -9,8 +9,8 @@
 import Foundation
 
 protocol UsersAPIProtocol {
-    func getUsers(completion: @escaping (Result<BaseResponse<[UserModel]>?, NSError>) -> Void)
-    func createUser(name: String, job: String, completion: @escaping (Result<CreateUserResponse?, NSError>) -> Void)
+    func getUsers(completion: @escaping (Result<BaseResponse<[UserModel]>?, GFError>) -> Void)
+    func createUser(name: String, job: String, completion: @escaping (Result<CreateUserResponse?, GFError>) -> Void)
 
 }
 
@@ -20,13 +20,13 @@ class UsersAPI: BaseAPI<UsersNetworking>, UsersAPIProtocol {
     
     //MARK:- Requests
     
-    func getUsers(completion: @escaping (Result<BaseResponse<[UserModel]>?, NSError>) -> Void) {
+    func getUsers(completion: @escaping (Result<BaseResponse<[UserModel]>?, GFError>) -> Void) {
         self.fetchData(target: .getUsers, responseClass: BaseResponse<[UserModel]>.self) { (result) in
             completion(result)
         }
     }
     
-    func createUser(name: String, job: String, completion: @escaping (Result<CreateUserResponse?, NSError>) -> Void) {
+    func createUser(name: String, job: String, completion: @escaping (Result<CreateUserResponse?, GFError>) -> Void) {
         self.postData(target: .createUser(name: name, job: job), responseClass: CreateUserResponse.self) { (result) in
             completion(result)
         }

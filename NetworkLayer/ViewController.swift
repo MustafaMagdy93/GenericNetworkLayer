@@ -12,8 +12,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let api: UsersAPIProtocol = UsersAPI()
-        api.createUser(name: "Mustafa", job: "iOS") { (result) in
+        api.createUser(name: "Mustafa", job: "iOS") { [weak self] (result) in
             switch result {
                 
             case .success(let response):
@@ -23,8 +24,8 @@ class ViewController: UIViewController {
                 print("Bad!")
                 
                 //Show AlertController
-                self.showAlert(messageTitle: "Warning!", messageBody: "Something went wrong please try again later", actionTitle: "OK")
-                print("Error: ", err.localizedDescription)
+                self?.showAlert(messageTitle: "Warning!", messageBody: err.rawValue, actionTitle: "OK")
+                print("Error: ", err.rawValue)
             }
         }
 //        api.getUsers { (result) in
