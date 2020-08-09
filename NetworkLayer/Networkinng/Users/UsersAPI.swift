@@ -17,6 +17,7 @@ protocol UsersAPIProtocol {
 
 class UsersAPI: BaseAPI<UsersNetworking>, UsersAPIProtocol {
     
+    static let shared: UsersAPIProtocol = UsersAPI()
     
     //MARK:- Requests
     

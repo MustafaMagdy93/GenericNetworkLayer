@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let api: UsersAPIProtocol = UsersAPI()
-        api.createUser(name: "Mustafa", job: "iOS") { [weak self] (result) in
+ //       let api: UsersAPIProtocol = UsersAPI()
+        UsersAPI.shared.createUser(name: "Mustafa", job: "iOS") { [weak self] (result) in
             switch result {
                 
             case .success(let response):
@@ -24,8 +24,9 @@ class ViewController: UIViewController {
                 print("Bad!")
                 
                 //Show AlertController
-                self?.showAlert(messageTitle: "Warning!", messageBody: err.rawValue, actionTitle: "OK")
-                print("Error: ", err.rawValue)
+//                self?.showAlert(messageTitle: "Warning!", messageBody: err.rawValue, actionTitle: "OK")
+//                print("Error: ", err.rawValue)
+                ShowAlert.alertUser(styleController: .actionSheet, messageTitle: "Warning!", messageBody: err.rawValue, actionTitleOne: "OK", actionStyleOne: .cancel, actionTitleTwo: "", actionStyleTwo: .default, viewController: self ?? UIViewController())
             }
         }
 //        api.getUsers { (result) in
@@ -40,13 +41,12 @@ class ViewController: UIViewController {
 //            }
 //        }
     }
-
-    func showAlert(messageTitle: String, messageBody: String, actionTitle: String) {
-        let alertController = UIAlertController(title: messageTitle, message: messageBody, preferredStyle: .alert)
-        let action = UIAlertAction(title: actionTitle, style: .default)
-        alertController.addAction(action)
-        self.present(alertController, animated: true)
-    }
+//    func showAlert(messageTitle: String, messageBody: String, actionTitle: String) {
+//        let alertController = UIAlertController(title: messageTitle, message: messageBody, preferredStyle: .alert)
+//        let action = UIAlertAction(title: actionTitle, style: .default)
+//        alertController.addAction(action)
+//        self.present(alertController, animated: true)
+//    }
     
 }
 
